@@ -1,0 +1,6 @@
+This is a first line of the text.
+And this is another.
+Let's write something in this third line.
+The fourth line should consist of something more interesting, a quote for instance, by a famous thinker or phylosopher.
+Socrates said, an unexamined life is not worth living.
+Decartes was wondering about how we can tell the difference between a dream and reality. 
