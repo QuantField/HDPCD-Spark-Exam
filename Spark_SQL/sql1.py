@@ -1,87 +1,21 @@
-from pyspark.sql import SQLContext
+from pyspark.sql import SQLContext, Row
 sq  = SQLContext(sc)
-#df  = sq.read.json("file:/home/ks/hdpcd_spark/data/people.json")
-df  = sq.read.json("file:/home/kamel_dev/data/people.json")
+rdd  = sc.textFile("file:/home/kamel_dev/data/people.txt")\
+            .map(lambda x : x.split(","))\
+            .map(lambda x : Row(name = x[0], age=int(x[1])))
 
-df.show()
-+---+-------+
-|age|   name|
-+---+-------+
-| 20|Michael|
-| 30|   Andy|
-| 19| Justin|
-| 49|   Karl|
-| 35|   John|
-| 31|  Marin|
-| 52|    Bob|
-+---+-------+
-
-# to use SQL, we need to register the dataframe df first
-df.registerTempTable("myDF_tab")
-df2  = sq.sql("select * from myDF_tab limit 3") # top 3
-+---+-------+
-|age|   name|
-+---+-------+
-| 20|Michael|
-| 30|   Andy|
-| 19| Justin|
-+---+-------+
-+---+-------+
-|age|   name|
-+---+-------+
-| 20|Michael|
-| 30|   Andy|
-| 19| Justin|
-+---+-------+
+# Infer the schema, and register the DataFrame as a table.
+schemaPeople = sq.createDataFrame(rdd)
+schemaPeople.registerTempTable("people")
 
 
-
-df.printSchema()
-
-root
- |-- age: long (nullable = true)
- |-- name: string (nullable = true
-         
-df.select("name").show(3)
-
-+-------+
-|   name|
-+-------+
-|Michael|
-|   Andy|
-| Justin|
-+-------+
-
-same as 
-
-df.select(df["name"]).show(3)
-
-
-
-df.filter(df["age"]>30).show()
-
-+---+-----+
-|age| name|
-+---+-----+
-| 49| Karl|
-| 35| John|
-| 31|Marin|
-| 52|  Bob|
-+---+-----+
-
-
-df.groupBy("age").count().show()
-+---+-----+
-|age|count|
-+---+-----+
-| 31|    1|
-| 35|    1|
-| 49|    1|
-| 52|    1|
-| 19|    1|
-| 20|    1|
-| 30|    1|
-+---+-----+
-
-
+young = sq.sql("SELECT * FROM people WHERE age >= 13 AND age <= 30")
+young.show()
++---+---------+
+|age|     name|
++---+---------+
+| 20|"Michael"|
+| 30|   "Andy"|
+| 19| "Justin"|
++---+---------+
 
