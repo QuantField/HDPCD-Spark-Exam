@@ -1,54 +1,55 @@
-##HortonWroks HDPCD: Spark Exam
+# HortonWroks HDPCD: Spark Exam
 
-#The exam platform as of Aug 2018: 
+## The exam platform as of Aug 2018: 
 
-    HDP 2.4.0
-    Spark 1.6
-    Scala 2.10.5
-    Python 2.7.6 (pyspark)
+- HDP 2.4.0
+- Spark 1.6
+- Scala 2.10.5
+- Python 2.7.6 (pyspark)
 
 
-##Exam Objectives:
-==================
+## Exam Objectives:
+------------------
 
-##Core Spark
------------
+## Core Spark
+-------------
 
-#Write a Spark Core application in Python or Scala
+* Write a Spark Core application in Python or Scala
 
-#Initialize a Spark application
-	
+* Initialize a Spark application
+
+```python
 conf = SparkConf().setAppName(appName).setMaster(master)
 sc = SparkContext(conf=conf)
+```
+* Run a Spark job on YARN
 
-#Run a Spark job on YARN
+* Create an RDD
 
-#Create an RDD
+* Create an RDD from a file or directory in HDFS
 
-#Create an RDD from a file or directory in HDFS
+* Persist an RDD in memory or on disk
 
-#Persist an RDD in memory or on disk
+* Perform Spark transformations on an RDD
 
-#Perform Spark transformations on an RDD
+* Perform Spark actions on an RDD
 
-#Perform Spark actions on an RDD
+* Create and use broadcast variables and accumulators
 
-#Create and use broadcast variables and accumulators
+* Configure Spark properties
 
-#Configure Spark properties
+-------------
+## Spark SQL
+-------------
 
+* Create Spark DataFrames from an existing RDD
 
-##Spark SQL
-----------
+* Perform operations on a DataFrame
 
-#Create Spark DataFrames from an existing RDD
+* Write a Spark SQL application
 
-#Perform operations on a DataFrame
+* Use Hive with ORC from Spark SQL
 
-#Write a Spark SQL application
-
-#Use Hive with ORC from Spark SQL
-
-#Write a Spark SQL application that reads and writes data from Hive tables
+* Write a Spark SQL application that reads and writes data from Hive tables
 
 

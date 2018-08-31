@@ -1,6 +1,7 @@
 from pyspark.sql import SQLContext, Row
 sqlC = SQLContext(sc)
-
+# if we want to import json files it will be with SQLContext above
+# not with the default sc
 # uploading csv file
 
 rdd = sc.textFile("/user/kamel_dev/housing.csv")
@@ -53,10 +54,17 @@ root
  |-- ocean_proximity: string (nullable = true)
 
 
+#------ to use sql queries we must register the table first
 
+df.registerTempTable("housing")
 
+sqlC.sql("select  ocean_proximity  from housing limit 3").show()
++---------------+
+|ocean_proximity|
++---------------+
+|       NEAR BAY|
+|       NEAR BAY|
+|       NEAR BAY|
++---------------+
 
-
-
-
-
+df.select(df['ocean_proximity']).show(3) # same as sql statement above
