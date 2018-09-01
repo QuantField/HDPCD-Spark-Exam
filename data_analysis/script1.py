@@ -1,3 +1,10 @@
+#
+# very important !!!
+# in order for sql to work it is important to declare the first two lines below before we start using the the sc default context, sc.parallilize for example. If we work with sc and then create SQLContext thihg can get weird .
+
+from pyspark.sql import SQLContext
+sqC    = SQLContext(sc)
+
 data = [(1, "John", 25), (2, "Ray", 35), (3,"Mike", 24), (4, "Jane", 28), 
 (5, "Kevin", 26), (6, "Vincent", 35), (7,"James", 38), (8, "Shane", 32), 
 (9, "Larry", 29), (10, "Kimberly", 29),(11, "Alex", 28), (12, "Garry", 25), 
@@ -32,8 +39,6 @@ employees.orderBy('age',ascending=False).show()
 # employees.write.parquet("employee.parquet")
 # for reading ... sqC.read.parquet("employee.parquet")
 
-from pyspark.sql import SQLContext
-sqC    = SQLContext(sc)
 salary = sqC.read.json("file:/home/kamel_dev/data/salary.json")
 designation = sqC.read.json("file:/home/kamel_dev/data/designation.json")
 
